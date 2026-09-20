@@ -13,6 +13,7 @@ app.get('/api/users', async (req, res) => {
     const response = await axios.get('http://user-service:3000/users');
     res.json(response.data);
   } catch (error) {
+    console.log('error', error);
     res.status(500).json({ error: 'Error fetching users' });
   }
 });
@@ -37,7 +38,10 @@ app.get('/api/orders', async (req, res) => {
 
 app.post('/api/orders', async (req, res) => {
   try {
-    const response = await axios.post('http://order-service:3002/orders', req.body);
+    const response = await axios.post(
+      'http://order-service:3002/orders',
+      req.body
+    );
     res.json(response.data);
   } catch (error) {
     res.status(500).json({ error: 'Error creating order' });
